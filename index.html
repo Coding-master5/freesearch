@@ -1,0 +1,92 @@
+<html id="image">
+    <head>
+        <title>Freesearch - public searching tool</title>
+        <link rel="icon" type="image/x-icon" href="search_logo.png">
+        <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet'>
+    </head>
+    <style>
+        ::selection {
+            background: #006eff;
+            color: #ffffff;
+        }
+        .centered {
+            position: absolute;
+            top: 25%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        html {
+            font-family: "Raleway";
+            background-image: url("mountain.jpeg");
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: 100%;
+        }
+        #opacity::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 10px;
+        height: 10px;
+        background: #04AA6D;
+        cursor: pointer;
+        border-radius: 10px;
+        }
+
+        #opacity::-moz-range-thumb {
+        width: 10px;
+        height: 10px;
+        background: #04AA6D;
+        border-radius: 10px;
+        }
+        #opacity {
+        -webkit-appearance: none;
+        width: 100%;
+        height: 10px;
+        background: #d3d3d3;
+        outline: none;
+        border-radius: 10px;
+        }
+    </style>
+    <body>
+        <h1 class="centered" style="font-size: 150px; color: #000000" id="txt">Freesearch</h1>
+        <p style="position: absolute; top: 55%; left: 50%; transform: translate(-50%, -50%); color: #ffffff;" id="smalltxt">The world's best advanced search engine</p>
+        
+        <button style="position: absolute; top: 20px; right: 20px; height: 40px; width: 40px; border-style: solid; border-color: transparent; border-radius: 40px; background-color: #ffffff;" onclick="openModal()"><img src="paintbrush.png" style="width: 20px; height: 15px; position: absolute; right: 8px; top: 10px"></button>
+        <input id="searchbar" style="width: 50%; height: 40px; border-style: solid; border-color: #000000; border-radius: 40px; position: absolute; top: 65%; left: 50%;transform: translate(-50%, -50%);"/>
+        <div style="display: none; padding: 20px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); border-radius: 30px; background-color: #ffffff;" id="modal">
+            <h3 style="text-align: center;">Change background properties</h3>
+            <p>Background image</p>
+            <input id="url" type="url" style="width: 200px; height: 40px; background-color: #ffffff; border-style: solid; border-color: #000000; border-radius: 10px;" placeholder="data:image.."/>
+            <p>Header text color</p>
+            <input type="color" style="border-radius: 20px; background-color: #000000; border-style: solid; border-color: transparent;" id="textColor"/>
+            <button id="changeBtn" onclick="changeBackgroundProperties()" style="background-color: e6e6ff; height: 40px; width: 90px; border-style: solid; border-color: #000000; border-radius: 10px;">Change</button>
+        </div>
+        <script>
+            function changeBackgroundProperties() {
+                var bg = document.getElementById('image');
+                var img = document.getElementById('url').value;
+                bg.style.backgroundImage = "url(" + img + "), url('mountain.jpeg')";
+                var headertxt = document.getElementById('txt');
+                var headercolor = document.getElementById('textColor').value;
+                headertxt.style.color = headercolor;
+                document.getElementById('textColor').style.backgroundColor = document.getElementById('txt').style.color;
+                closeModal();
+            }
+            function openModal() {
+                document.getElementById('modal').style.display = ('block');
+            }
+            function closeModal() {
+                document.getElementById('modal').style.display = ('none');
+            }
+            function search() {
+                var url = 'https://www.google.com/search?q=' + document.getElementById('searchbar').value.replace(' ', '%20');
+                window.open(url,'_blank');
+            }
+            var input = document.getElementById('searchbar');
+            input.addEventListener("keyup", (event) => {
+              if (event.key === "Enter") {
+                search();
+              }
+            });
+        </script>
+    </body>
